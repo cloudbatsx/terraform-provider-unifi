@@ -36,17 +36,9 @@ type SettingUsg struct {
 	DHCPRelayHopCount              int                       `json:"dhcp_relay_hop_count,omitempty"` // ([1-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])|^$
 	DHCPRelayMaxSize               int                       `json:"dhcp_relay_max_size,omitempty"`  // (6[4-9]|[7-9][0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1[0-3][0-9]{2}|1400)|^$
 	DHCPRelayPort                  int                       `json:"dhcp_relay_port,omitempty"`      // [1-9][0-9]{0,3}|[1-5][0-9]{4}|[6][0-4][0-9]{3}|[6][5][0-4][0-9]{2}|[6][5][5][0-2][0-9]|[6][5][5][3][0-5]|^$
-	DHCPRelayServer1               string                    `json:"dhcp_relay_server_1"`            // ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^$
-	DHCPRelayServer2               string                    `json:"dhcp_relay_server_2"`            // ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^$
-	DHCPRelayServer3               string                    `json:"dhcp_relay_server_3"`            // ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^$
-	DHCPRelayServer4               string                    `json:"dhcp_relay_server_4"`            // ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^$
-	DHCPRelayServer5               string                    `json:"dhcp_relay_server_5"`            // ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^$
 	DNSVerification                SettingUsgDNSVerification `json:"dns_verification,omitempty"`
 	DNSmasqAllServers              bool                      `json:"dnsmasq_all_servers"`
 	EchoServer                     string                    `json:"echo_server,omitempty"` // [^\"\' ]{1,255}
-	FirewallGuestDefaultLog        bool                      `json:"firewall_guest_default_log"`
-	FirewallLanDefaultLog          bool                      `json:"firewall_lan_default_log"`
-	FirewallWANDefaultLog          bool                      `json:"firewall_wan_default_log"`
 	FtpModule                      bool                      `json:"ftp_module"`
 	GeoIPFilteringBlock            string                    `json:"geo_ip_filtering_block,omitempty"`     // block|allow
 	GeoIPFilteringCountries        string                    `json:"geo_ip_filtering_countries,omitempty"` // ^([A-Z]{2})?(,[A-Z]{2}){0,149}$
@@ -80,10 +72,11 @@ type SettingUsg struct {
 	TimeoutSettingPreference       string                    `json:"timeout_setting_preference,omitempty"` // auto|manual
 	UDPOtherTimeout                int                       `json:"udp_other_timeout,omitempty"`
 	UDPStreamTimeout               int                       `json:"udp_stream_timeout,omitempty"`
+	UnbindWANMonitors              bool                      `json:"unbind_wan_monitors"`
 	UpnpEnabled                    bool                      `json:"upnp_enabled"`
 	UpnpNATPmpEnabled              bool                      `json:"upnp_nat_pmp_enabled"`
 	UpnpSecureMode                 bool                      `json:"upnp_secure_mode"`
-	UpnpWANInterface               string                    `json:"upnp_wan_interface,omitempty"` // WAN|WAN2
+	UpnpWANInterface               string                    `json:"upnp_wan_interface,omitempty"` // WAN[2-9]?
 }
 
 func (dst *SettingUsg) UnmarshalJSON(b []byte) error {

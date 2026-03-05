@@ -63,26 +63,6 @@ func TestAccSettingUsg_mdns_v7(t *testing.T) {
 	})
 }
 
-func TestAccSettingUsg_dhcpRelay(t *testing.T) {
-	resource.ParallelTest(t, resource.TestCase{
-		PreCheck: func() {
-			preCheck(t)
-			settingUsgLock.Lock()
-			t.Cleanup(func() {
-				settingUsgLock.Unlock()
-			})
-		},
-		ProviderFactories: providerFactories,
-		Steps: []resource.TestStep{
-			{
-				Config: testAccSettingUsgConfig_dhcpRelay(),
-				Check:  resource.ComposeTestCheckFunc(),
-			},
-			importStep("unifi_setting_usg.test"),
-		},
-	})
-}
-
 func TestAccSettingUsg_site(t *testing.T) {
 	resource.ParallelTest(t, resource.TestCase{
 		PreCheck: func() {
@@ -114,17 +94,6 @@ resource "unifi_setting_usg" "test" {
 	multicast_dns_enabled = %t
 }
 `, mdns)
-}
-
-func testAccSettingUsgConfig_dhcpRelay() string {
-	return `
-resource "unifi_setting_usg" "test" {
-	dhcp_relay_servers = [
-		"10.1.2.3",
-		"10.1.2.4",
-	]
-}
-`
 }
 
 func testAccSettingUsgConfig_site() string {

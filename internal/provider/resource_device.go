@@ -3,7 +3,7 @@ package provider
 import (
 	"context"
 	"fmt"
-	"strconv"
+
 	"strings"
 	"time"
 
@@ -104,18 +104,7 @@ func resourceDevice() *schema.Resource {
 							Optional:     true,
 							ValidateFunc: validation.StringInSlice([]string{"auto", "pasv24", "passthrough", "off"}, false),
 						},
-						"aggregate_num_ports": {
-							Description:  "Number of ports in the aggregate.",
-							Type:         schema.TypeInt,
-							Optional:     true,
-							ValidateFunc: validation.IntBetween(2, 8),
-							DiffSuppressFunc: func(k, old, new string, d *schema.ResourceData) bool {
-								if old == strconv.Itoa(0) && new == "" {
-									return true
-								}
-								return false
-							},
-						},
+						// aggregate_num_ports was removed in UniFi v10; use aggregate_members on the API instead.
 					},
 				},
 			},
@@ -363,26 +352,23 @@ func toPortOverride(data map[string]interface{}) (unifi.DevicePortOverrides, err
 	profileID := data["port_profile_id"].(string)
 	opMode := data["op_mode"].(string)
 	poeMode := data["poe_mode"].(string)
-	aggregateNumPorts := data["aggregate_num_ports"].(int)
 
 	return unifi.DevicePortOverrides{
-		PortIDX:           idx,
-		Name:              name,
-		PortProfileID:     profileID,
-		OpMode:            opMode,
-		PoeMode:           poeMode,
-		AggregateNumPorts: aggregateNumPorts,
+		PortIDX:       idx,
+		Name:          name,
+		PortProfileID: profileID,
+		OpMode:        opMode,
+		PoeMode:       poeMode,
 	}, nil
 }
 
 func fromPortOverride(po unifi.DevicePortOverrides) (map[string]interface{}, error) {
 	return map[string]interface{}{
-		"number":              po.PortIDX,
-		"name":                po.Name,
-		"port_profile_id":     po.PortProfileID,
-		"op_mode":             po.OpMode,
-		"poe_mode":            po.PoeMode,
-		"aggregate_num_ports": po.AggregateNumPorts,
+		"number":          po.PortIDX,
+		"name":            po.Name,
+		"port_profile_id": po.PortProfileID,
+		"op_mode":         po.OpMode,
+		"poe_mode":        po.PoeMode,
 	}, nil
 }
 

@@ -25,6 +25,7 @@ type WLAN struct {
 	NoDelete bool   `json:"attr_no_delete,omitempty"`
 	NoEdit   bool   `json:"attr_no_edit,omitempty"`
 
+	AdvertiseDeviceNameInBeacon bool                       `json:"advertise_device_name_in_beacon"`
 	ApGroupIDs                  []string                   `json:"ap_group_ids,omitempty"`
 	ApGroupMode                 string                     `json:"ap_group_mode,omitempty"` // all|groups|devices
 	AuthCache                   bool                       `json:"auth_cache"`
@@ -41,6 +42,7 @@ type WLAN struct {
 	DTIMNg                      int                        `json:"dtim_ng,omitempty"`   // ^([1-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^$
 	ElementAdopt                bool                       `json:"element_adopt"`
 	Enabled                     bool                       `json:"enabled"`
+	EnhancedIot                 bool                       `json:"enhanced_iot"`
 	FastRoamingEnabled          bool                       `json:"fast_roaming_enabled"`
 	GroupRekey                  int                        `json:"group_rekey,omitempty"` // ^(0|[6-9][0-9]|[1-9][0-9]{2,3}|[1-7][0-9]{4}|8[0-5][0-9]{3}|86[0-3][0-9][0-9]|86400)$
 	HideSSID                    bool                       `json:"hide_ssid"`
@@ -53,6 +55,8 @@ type WLAN struct {
 	MACFilterEnabled            bool                       `json:"mac_filter_enabled"`
 	MACFilterList               []string                   `json:"mac_filter_list,omitempty"`   // ^([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})$
 	MACFilterPolicy             string                     `json:"mac_filter_policy,omitempty"` // allow|deny
+	MdnsProxyCustom             []WLANMdnsProxyCustom      `json:"mdns_proxy_custom,omitempty"`
+	MdnsProxyMode               string                     `json:"mdns_proxy_mode,omitempty"` // off|auto|custom
 	MinrateNaAdvertisingRates   bool                       `json:"minrate_na_advertising_rates"`
 	MinrateNaDataRateKbps       int                        `json:"minrate_na_data_rate_kbps,omitempty"`
 	MinrateNaEnabled            bool                       `json:"minrate_na_enabled"`
@@ -217,6 +221,27 @@ func (dst *WLANCellularNetworkList) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+type WLANCustomServices struct {
+	Address string `json:"address,omitempty"` // ^_[a-zA-Z0-9._-]+\._(tcp|udp)(\.local)?$
+	Name    string `json:"name,omitempty"`
+}
+
+func (dst *WLANCustomServices) UnmarshalJSON(b []byte) error {
+	type Alias WLANCustomServices
+	aux := &struct {
+		*Alias
+	}{
+		Alias: (*Alias)(dst),
+	}
+
+	err := json.Unmarshal(b, &aux)
+	if err != nil {
+		return fmt.Errorf("unable to unmarshal alias: %w", err)
+	}
+
+	return nil
+}
+
 type WLANFriendlyName struct {
 	Language string `json:"language,omitempty"` // [a-z]{3}
 	Text     string `json:"text,omitempty"`     // .{1,128}
@@ -304,6 +329,33 @@ func (dst *WLANHotspot2) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
+type WLANMdnsProxyCustom struct {
+	ApGroupIDs         []string                 `json:"ap_group_ids,omitempty"`
+	ApMACs             []string                 `json:"ap_macs,omitempty"`       // ^([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})$
+	ApScopeMode        string                   `json:"ap_scope_mode,omitempty"` // all|specific|group
+	CustomServices     []WLANCustomServices     `json:"custom_services,omitempty"`
+	IsolationEnabled   bool                     `json:"isolation_enabled"`
+	NetworkIDs         []string                 `json:"networkconf_ids,omitempty"`
+	PredefinedServices []WLANPredefinedServices `json:"predefined_services,omitempty"`
+	ServicesMode       string                   `json:"services_mode,omitempty"` // all|specific|none
+}
+
+func (dst *WLANMdnsProxyCustom) UnmarshalJSON(b []byte) error {
+	type Alias WLANMdnsProxyCustom
+	aux := &struct {
+		*Alias
+	}{
+		Alias: (*Alias)(dst),
+	}
+
+	err := json.Unmarshal(b, &aux)
+	if err != nil {
+		return fmt.Errorf("unable to unmarshal alias: %w", err)
+	}
+
+	return nil
+}
+
 type WLANNaiRealmList struct {
 	AuthIDs   []int  `json:"auth_ids,omitempty"`   // 0|1|2|3|4|5
 	AuthVals  []int  `json:"auth_vals,omitempty"`  // 0|1|2|3|4|5|6|7|8|9|10
@@ -340,6 +392,26 @@ func (dst *WLANNaiRealmList) UnmarshalJSON(b []byte) error {
 	}
 	dst.EapMethod = int(aux.EapMethod)
 	dst.Encoding = int(aux.Encoding)
+
+	return nil
+}
+
+type WLANPredefinedServices struct {
+	Code string `json:"code,omitempty"` // amazon_devices|android_tv_remote|apple_airDrop|apple_airPlay|apple_file_sharing|apple_iChat|apple_iTunes|aqara|bose|dns_service_discovery|ftp_servers|google_chromecast|homeKit|matter_network|philips_hue|printers|roku|scanners|sonos|spotify_connect|ssh_servers|time_capsule|web_servers|windows_file_sharing_samba
+}
+
+func (dst *WLANPredefinedServices) UnmarshalJSON(b []byte) error {
+	type Alias WLANPredefinedServices
+	aux := &struct {
+		*Alias
+	}{
+		Alias: (*Alias)(dst),
+	}
+
+	err := json.Unmarshal(b, &aux)
+	if err != nil {
+		return fmt.Errorf("unable to unmarshal alias: %w", err)
+	}
 
 	return nil
 }
