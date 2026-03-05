@@ -171,6 +171,8 @@ github.com/chavacava/garif v0.1.0/go.mod h1:XMyYCkEL58DF0oyW4qDjjnPWONs2HBqYKI+U
 github.com/ckaznocha/intrange v0.1.2 h1:3Y4JAxcMntgb/wABQ6e8Q8leMd26JbX2790lIss9MTI=
 github.com/ckaznocha/intrange v0.1.2/go.mod h1:RWffCw/vKBwHeOEwWdCikAtY0q4gGt8VhJZEEA5n+RE=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
+github.com/cloudbatsx/go-unifi v1.0.3 h1:Jb4oGV412hx/btErJzDLb2rl1odigz0cKUr9NMH0bRU=
+github.com/cloudbatsx/go-unifi v1.0.3/go.mod h1:Ff/abvziWtLeEYTb9dwuINczqFPlNhsOX/M89z+I0ZQ=
 github.com/cloudflare/cfssl v0.0.0-20180223231731-4e2dcbde5004 h1:lkAMpLVBDaj17e85keuznYcH5rqI438v41pKcBl4ZxQ=
 github.com/cloudflare/cfssl v0.0.0-20180223231731-4e2dcbde5004/go.mod h1:yMWuSON2oQp+43nFtAV/uvKQIFpSPerB57DCt9t8sSA=
 github.com/cloudflare/circl v1.3.8 h1:j+V8jJt09PoeMFIu2uh5JUyEaIHTXVOHslFoLNAKqwI=
@@ -829,8 +831,6 @@ github.com/sashamelentyev/interfacebloat v1.1.0 h1:xdRdJp0irL086OyW1H/RTZTr1h/tM
 github.com/sashamelentyev/interfacebloat v1.1.0/go.mod h1:+Y9yU5YdTkrNvoX0xHc84dxiN1iBi9+G8zZIhPVoNjQ=
 github.com/sashamelentyev/usestdlibvars v1.26.0 h1:LONR2hNVKxRmzIrZR0PhSF3mhCAzvnr+DcUiHgREfXE=
 github.com/sashamelentyev/usestdlibvars v1.26.0/go.mod h1:9nl0jgOfHKWNFS43Ojw0i7aRoS4j6EBye3YBhmAIRF8=
-github.com/sayedh/go-unifi v1.0.2 h1:aLXXK4a9w81Nyy9rtsDbGqxtIPXRT81X31uC7NMJFTM=
-github.com/sayedh/go-unifi v1.0.2/go.mod h1:HtudPkwqEhiMwZbFotv0ikoiMZC0/WV8bQv+QbV2Soo=
 github.com/secure-systems-lab/go-securesystemslib v0.8.0 h1:mr5An6X45Kb2nddcFlbmfHkLguCE9laoZCUzEEpIZXA=
 github.com/secure-systems-lab/go-securesystemslib v0.8.0/go.mod h1:UH2VZVuJfCYR8WgMlCU1uFsOUU+KeyrTWcSS73NBOzU=
 github.com/securego/gosec/v2 v2.20.1-0.20240525090044-5f0084eb01a9 h1:rnO6Zp1YMQwv8AyxzuwsVohljJgp4L0ZqiCgtACsPsc=

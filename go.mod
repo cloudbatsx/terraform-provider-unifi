@@ -1,4 +1,4 @@
-module github.com/sayedh/terraform-provider-unifi
+module github.com/cloudbatsx/terraform-provider-unifi
 
 go 1.22.5
 
@@ -8,18 +8,20 @@ go 1.22.5
 
 require (
 	github.com/apparentlymart/go-cidr v1.1.0
+	// Deprecated from paultyng/go-unifi - UnifiVersion = "7.4.162"
+	// github.com/paultyng/go-unifi v1.30.1
+	github.com/cloudbatsx/go-unifi v1.0.3
 	github.com/deckarep/golang-set/v2 v2.3.1
 	github.com/golangci/golangci-lint v1.59.1
 	github.com/hashicorp/go-version v1.7.0
 	github.com/hashicorp/terraform-plugin-docs v0.16.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.34.0
 	github.com/hashicorp/terraform-plugin-testing v1.3.0
-	// Deprecated from paultyng/go-unifi - UnifiVersion = "7.4.162"
-	// github.com/paultyng/go-unifi v1.30.1
-	github.com/sayedh/go-unifi v1.0.2
 	github.com/testcontainers/testcontainers-go v0.32.0
 	github.com/testcontainers/testcontainers-go/modules/compose v0.32.0
 )
+
+require github.com/hashicorp/terraform-plugin-log v0.9.0
 
 require (
 	4d63.com/gocheckcompilerdirectives v1.2.1 // indirect
@@ -183,7 +185,6 @@ require (
 	github.com/hashicorp/terraform-exec v0.21.0 // indirect
 	github.com/hashicorp/terraform-json v0.22.1 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.23.0 // indirect
-	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	github.com/hashicorp/terraform-registry-address v0.2.3 // indirect
 	github.com/hashicorp/terraform-svchost v0.1.1 // indirect
 	github.com/hashicorp/yamux v0.1.1 // indirect
