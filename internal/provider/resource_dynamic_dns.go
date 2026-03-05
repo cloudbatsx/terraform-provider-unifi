@@ -3,9 +3,9 @@ package provider
 import (
 	"context"
 
+	"github.com/cloudbatsx/go-unifi/unifi"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/cloudbatsx/go-unifi/unifi"
 )
 
 func resourceDynamicDNS() *schema.Resource {
