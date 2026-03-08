@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/cloudbats-lockup-horizontal-dark-960.png">
+    <img src=".github/cloudbats-lockup-horizontal-light-960.png" alt="CloudBats" width="400">
+  </picture>
+</p>
+
 # Unifi Terraform Provider (terraform-provider-unifi)
 
 A Terraform provider for managing Ubiquiti UniFi Network infrastructure, maintained by [cloudbats](https://cloudbats.com).
