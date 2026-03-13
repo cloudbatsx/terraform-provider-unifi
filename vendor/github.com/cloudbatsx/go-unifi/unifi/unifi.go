@@ -245,18 +245,33 @@ func (c *Client) do(ctx context.Context, method, relativeURL string, reqBody int
 
 	if resp.StatusCode != http.StatusOK {
 		errBody := struct {
-			Meta meta `json:"meta"`
-			Data []struct {
-				Meta meta `json:"meta"`
-			} `json:"data"`
+			Meta meta            `json:"meta"`
+			Data json.RawMessage `json:"data"`
 		}{}
 		if err = json.NewDecoder(resp.Body).Decode(&errBody); err != nil {
 			return err
 		}
 		var apiErr error
-		if len(errBody.Data) > 0 && errBody.Data[0].Meta.RC == "error" {
-			// check first error in data, should we look for more than one?
-			apiErr = errBody.Data[0].Meta.error()
+		if errBody.Data != nil {
+			// try parsing data as array first
+			var dataArray []struct {
+				Meta meta `json:"meta"`
+			}
+			if jsonErr := json.Unmarshal(errBody.Data, &dataArray); jsonErr == nil {
+				if len(dataArray) > 0 && dataArray[0].Meta.RC == "error" {
+					apiErr = dataArray[0].Meta.error()
+				}
+			} else {
+				// try as single object
+				var dataObj struct {
+					Meta meta `json:"meta"`
+				}
+				if jsonErr := json.Unmarshal(errBody.Data, &dataObj); jsonErr == nil {
+					if dataObj.Meta.RC == "error" {
+						apiErr = dataObj.Meta.error()
+					}
+				}
+			}
 		}
 		if apiErr == nil {
 			apiErr = errBody.Meta.error()

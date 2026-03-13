@@ -2,6 +2,7 @@ module github.com/cloudbatsx/terraform-provider-unifi
 
 go 1.24.0
 
+// replace github.com/cloudbatsx/go-unifi => ../go-unifi
 // replace github.com/paultyng/go-unifi => ../go-unifi
 // replace github.com/hashicorp/terraform-plugin-docs => ../../hashicorp/terraform-plugin-docs
 // replace github.com/hashicorp/terraform-plugin-sdk/v2 => ../../hashicorp/terraform-plugin-sdk
@@ -10,7 +11,7 @@ require (
 	github.com/apparentlymart/go-cidr v1.1.0
 	// Deprecated from paultyng/go-unifi - UnifiVersion = "7.4.162"
 	// github.com/paultyng/go-unifi v1.30.1
-	github.com/cloudbatsx/go-unifi v1.1.0
+	github.com/cloudbatsx/go-unifi v1.2.0
 	github.com/deckarep/golang-set/v2 v2.3.1
 	github.com/golangci/golangci-lint v1.59.1
 	github.com/hashicorp/go-version v1.7.0

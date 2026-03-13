@@ -47,9 +47,59 @@ func (c *Client) GetNetwork(ctx context.Context, site, id string) (*Network, err
 }
 
 func (c *Client) CreateNetwork(ctx context.Context, site string, d *Network) (*Network, error) {
-	return c.createNetwork(ctx, site, d)
+	var respBody struct {
+		Meta meta            `json:"meta"`
+		Data json.RawMessage `json:"data"`
+	}
+
+	err := c.do(ctx, "POST", fmt.Sprintf("s/%s/rest/networkconf", site), d, &respBody)
+	if err != nil {
+		return nil, err
+	}
+
+	var network Network
+	// try as array first (standard UniFi response)
+	var dataArray []Network
+	if jsonErr := json.Unmarshal(respBody.Data, &dataArray); jsonErr == nil {
+		if len(dataArray) != 1 {
+			return nil, &NotFoundError{}
+		}
+		network = dataArray[0]
+	} else {
+		// try as single object
+		if jsonErr := json.Unmarshal(respBody.Data, &network); jsonErr != nil {
+			return nil, fmt.Errorf("unable to unmarshal network response data: %w", jsonErr)
+		}
+	}
+
+	return &network, nil
 }
 
 func (c *Client) UpdateNetwork(ctx context.Context, site string, d *Network) (*Network, error) {
-	return c.updateNetwork(ctx, site, d)
+	var respBody struct {
+		Meta meta            `json:"meta"`
+		Data json.RawMessage `json:"data"`
+	}
+
+	err := c.do(ctx, "PUT", fmt.Sprintf("s/%s/rest/networkconf/%s", site, d.ID), d, &respBody)
+	if err != nil {
+		return nil, err
+	}
+
+	var network Network
+	// try as array first (standard UniFi response)
+	var dataArray []Network
+	if jsonErr := json.Unmarshal(respBody.Data, &dataArray); jsonErr == nil {
+		if len(dataArray) != 1 {
+			return nil, &NotFoundError{}
+		}
+		network = dataArray[0]
+	} else {
+		// try as single object
+		if jsonErr := json.Unmarshal(respBody.Data, &network); jsonErr != nil {
+			return nil, fmt.Errorf("unable to unmarshal network response data: %w", jsonErr)
+		}
+	}
+
+	return &network, nil
 }

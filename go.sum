@@ -171,8 +171,8 @@ github.com/chavacava/garif v0.1.0/go.mod h1:XMyYCkEL58DF0oyW4qDjjnPWONs2HBqYKI+U
 github.com/ckaznocha/intrange v0.1.2 h1:3Y4JAxcMntgb/wABQ6e8Q8leMd26JbX2790lIss9MTI=
 github.com/ckaznocha/intrange v0.1.2/go.mod h1:RWffCw/vKBwHeOEwWdCikAtY0q4gGt8VhJZEEA5n+RE=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
-github.com/cloudbatsx/go-unifi v1.1.0 h1:HCA9+BSy7jD9miYjqLF5VkpvbF2PR9m93S0s0bf/noY=
-github.com/cloudbatsx/go-unifi v1.1.0/go.mod h1:v8CPrZOBmY1rayWU8SK6YWo/E/0tHy1ZxgSVI0rJI7A=
+github.com/cloudbatsx/go-unifi v1.2.0 h1:plom+ruoYQ+UPt9U/Q3iU7wwOG2JKJyQJ+yUyoYy4gI=
+github.com/cloudbatsx/go-unifi v1.2.0/go.mod h1:v8CPrZOBmY1rayWU8SK6YWo/E/0tHy1ZxgSVI0rJI7A=
 github.com/cloudflare/cfssl v0.0.0-20180223231731-4e2dcbde5004 h1:lkAMpLVBDaj17e85keuznYcH5rqI438v41pKcBl4ZxQ=
 github.com/cloudflare/cfssl v0.0.0-20180223231731-4e2dcbde5004/go.mod h1:yMWuSON2oQp+43nFtAV/uvKQIFpSPerB57DCt9t8sSA=
 github.com/cloudflare/circl v1.3.8 h1:j+V8jJt09PoeMFIu2uh5JUyEaIHTXVOHslFoLNAKqwI=
